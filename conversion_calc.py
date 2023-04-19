@@ -1,82 +1,80 @@
-#conversion functions
+#conversion functions for my conversion calculator
+#conversion to mm from inches
 def inches_to_mm(length_in_inches):
     length_in_mm = length_in_inches * 25.4
     return length_in_mm
-
+#conversion to inches from mm
 def mm_to_inches(length_in_mm):
     length_in_inches = length_in_mm / 25.4
     return length_in_inches
-
+#conversion to meters from feet
 def feet_to_meters(length_in_feet):
     length_in_meters = length_in_feet * 0.3048
     return length_in_meters
-
+#conversion to feet from meters
 def meters_to_feet(length_in_meters):
     length_in_feet = length_in_meters / 0.3048
     return length_in_feet
-
+#conversion to Celsius from Fahrenheit
 def F_to_C(temp_in_F):
     temp_in_C = (temp_in_F - 32) * 5/9
     return temp_in_C
-
+#conversion to Fahrenheit to Celsius
 def C_to_F(temp_in_C):
     temp_in_F = (temp_in_C * 9/5 +32)
     return temp_in_F
-
+#function for the print results 
 def print_results(value, converted_value, value_unit, converted_value_unit):
     print(f'{value} {value_unit} = {converted_value:.2f} {converted_value_unit}')
     value_unit = ""
     converted_value_unit = ""
-
-def preform_conversion(value, conversion_direction):
+# if else statments for the conversion direction so we output the right conversion.
+def perform_conversion(value, conversion_direction):
     if conversion_direction == 'in -> mm':
         converted_value = inches_to_mm(value)
         value_unit = "inches"
         converted_value_unit = "mm"
-       # print(f'{value} inches = {converted_value} mm')
-       # print_results(value, 'inches', converted_value, 'mm')
-        #do in to mm
     elif conversion_direction == 'mm -> in':
         converted_value = mm_to_inches(value)
         value_unit = "mm"
         converted_value_unit = "inches"
-        #do mm to in
-    #feet to meters
     elif conversion_direction == 'ft -> m':
         converted_value = feet_to_meters(value)
         value_unit = "ft"
         converted_value_unit = "m"
-    #meter to feet
     elif conversion_direction == 'm -> ft':
         converted_value = meters_to_feet(value)
         value_unit = "m"
         converted_value_unit = "ft"
-    #C to F
     elif conversion_direction == 'C -> F':
         converted_value = C_to_F(value)
         value_unit = "C"
         converted_value_unit = "F"
-    #F to C
     elif conversion_direction == 'F -> C':
         converted_value = F_to_C(value)
         value_unit = "F"
         converted_value_unit = "C"
-        
     else:
         print("Invalid conversion direction")
-
+        return None
+    
+    return (value, converted_value, value_unit, converted_value_unit)
+# list of my conversions
+conversion_list = ['in -> mm', 'mm -> in', 'ft -> m', 'm -> ft', 'C -> F', 'F -> C']
 
 while True:
-    # get the length from the user
-    conversion_direction = input('Enter conversion direction (in -> mm or mm -> in ft -> m m -> ft C -> F F -> C)or "q" to quit: ')
-    #exit the loop if user types "q"
+    # get the conversion direction from the user
+    conversion_direction = input('Enter conversion direction ({}), or "q" to quit: '.format(', '.join(conversion_list)))
     if conversion_direction == "q":
         break
 
+    # get the value to be converted from the user
     value = float(input("Enter value to be converted: "))
 
-    preform_conversion(value, conversion_direction)
+    # perform the conversion and print the results
+    conversion_result = perform_conversion(value, conversion_direction)
+    if conversion_result is not None:
+        print_results(*conversion_result)
 
-    
-print('Thanks for using the cAlc')
-
+#After exicting the calculator have an exciting statment.
+print('Thanks for using The Cool Conversion Calculator!')
