@@ -23,28 +23,52 @@ def C_to_F(temp_in_C):
     temp_in_F = (temp_in_C * 9/5 +32)
     return temp_in_F
 
+def print_results(value, converted_value, value_unit, converted_value_unit):
+    print(f'{value} {value_unit} = {converted_value:.2f} {converted_value_unit}')
+    value_unit = ""
+    converted_value_unit = ""
 
 def preform_conversion(value, conversion_direction):
     if conversion_direction == 'in -> mm':
         converted_value = inches_to_mm(value)
-        print(f'{value} inches = {converted_value} mm')
+        value_unit = "inches"
+        converted_value_unit = "mm"
+       # print(f'{value} inches = {converted_value} mm')
+       # print_results(value, 'inches', converted_value, 'mm')
         #do in to mm
     elif conversion_direction == 'mm -> in':
         converted_value = mm_to_inches(value)
-        print(f'{value} mm = {converted_value} inches')
+        value_unit = "mm"
+        converted_value_unit = "inches"
         #do mm to in
     #feet to meters
     elif conversion_direction == 'ft -> m':
         converted_value = feet_to_meters(value)
-        print(f'{value} ft = {converted_value} m')
+        value_unit = "ft"
+        converted_value_unit = "m"
+    #meter to feet
+    elif conversion_direction == 'm -> ft':
+        converted_value = meters_to_feet(value)
+        value_unit = "m"
+        converted_value_unit = "ft"
+    #C to F
+    elif conversion_direction == 'C -> F':
+        converted_value = C_to_F(value)
+        value_unit = "C"
+        converted_value_unit = "F"
+    #F to C
+    elif conversion_direction == 'F -> C':
+        converted_value = F_to_C(value)
+        value_unit = "F"
+        converted_value_unit = "C"
+        
     else:
         print("Invalid conversion direction")
 
 
 while True:
     # get the length from the user
-    conversion_direction = input('Enter conversion direction (in -> mm or mm -> in ft -> m)or "q" to quit: ')
-
+    conversion_direction = input('Enter conversion direction (in -> mm or mm -> in ft -> m m -> ft C -> F F -> C)or "q" to quit: ')
     #exit the loop if user types "q"
     if conversion_direction == "q":
         break
