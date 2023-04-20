@@ -57,10 +57,6 @@ def perform_conversion(value, conversion_direction):
         converted_value_unit = "C"
     else:
         print("Invalid conversion direction")
-    
-    
-
-    
     return (value, converted_value, value_unit, converted_value_unit)
 # list of my conversions
 conversion_list = ['in -> mm', 'mm -> in', 'ft -> m', 'm -> ft', 'C -> F', 'F -> C']
