@@ -30,6 +30,7 @@ def print_results(value, converted_value, value_unit, converted_value_unit):
     converted_value_unit = ""
 # if else statments for the conversion direction so we output the right conversion.
 def perform_conversion(value, conversion_direction):
+   
     if conversion_direction == 'in -> mm':
         converted_value = inches_to_mm(value)
         value_unit = "inches"
@@ -56,7 +57,9 @@ def perform_conversion(value, conversion_direction):
         converted_value_unit = "C"
     else:
         print("Invalid conversion direction")
-        return None
+    
+    
+
     
     return (value, converted_value, value_unit, converted_value_unit)
 # list of my conversions
@@ -68,13 +71,22 @@ while True:
     if conversion_direction == "q":
         break
 
+    # check if the conversion direction is valid
+    if conversion_direction not in conversion_list:
+        print("Invalid conversion direction, please enter valid conversion direction.")
+        continue
+
     # get the value to be converted from the user
-    value = float(input("Enter value to be converted: "))
+    try:
+        value = float(input("Enter value to be converted: "))
+    except ValueError:
+        print("Invalid input for value")
+        continue
 
     # perform the conversion and print the results
     conversion_result = perform_conversion(value, conversion_direction)
     if conversion_result is not None:
         print_results(*conversion_result)
 
-#After exicting the calculator have an exciting statment.
+#After exiting the calculator have an exiting statement.
 print('Thanks for using The Cool Conversion Calculator!')
